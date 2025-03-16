@@ -3,18 +3,25 @@ package com.barberbook.barberbook_backend.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.barberbook.barberbook_backend.model.AppointmentDTO;
 import com.barberbook.barberbook_backend.model.Appointments;
 import com.barberbook.barberbook_backend.repository.AppointmentsRepository;
 
-@Service
 public class AppointmentsService {
 
-    @Autowired
-    private AppointmentsRepository appointmentsRepository;
+    private static AppointmentsService INSTANCE;
+    private final AppointmentsRepository appointmentsRepository;
+
+    private AppointmentsService(AppointmentsRepository repository) {
+        this.appointmentsRepository = repository;
+    }
+
+    public static synchronized AppointmentsService getInstance(AppointmentsRepository repository) {
+        if (INSTANCE == null) {
+            INSTANCE = new AppointmentsService(repository);
+        }
+        return INSTANCE;
+    }
 
     public Appointments createAppointment(Appointments appointment) {
         return appointmentsRepository.save(appointment);
@@ -58,7 +65,7 @@ public class AppointmentsService {
         Long totalAppointments = appointmentsRepository.findTotalAppointments();
 
         if (totalAppointments == 0) {
-            return 0.0; // Evitar divisão por zero
+            return 0.0;
         }
 
         return totalRevenue / totalAppointments;
