@@ -1,20 +1,24 @@
 package com.barberbook.barberbook_backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.barberbook.barberbook_backend.repository.BarberRepository;
 import com.barberbook.barberbook_backend.model.Barber;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class BarberService {
 
+    private static BarberService INSTANCE;
     private final BarberRepository barberRepository;
 
-    @Autowired
-    public BarberService(BarberRepository barberRepository) {
+    private BarberService(BarberRepository barberRepository) {
         this.barberRepository = barberRepository;
+    }
+
+    public static synchronized BarberService getInstance(BarberRepository barberRepository) {
+        if (INSTANCE == null) {
+            INSTANCE = new BarberService(barberRepository);
+        }
+        return INSTANCE;
     }
 
     public List<Barber> getBarbersByBarbershopId(int barbershopId) {
