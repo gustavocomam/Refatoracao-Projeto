@@ -3,9 +3,9 @@ package com.barberbook.barberbook_backend.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "schedule")
+@Table(name = "schedule")
 public class Schedule {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,55 +22,23 @@ public class Schedule {
     @Column(name = "available", nullable = false)
     private Boolean available;
 
-    public Schedule(){
-
-    }
-
-    public Schedule(Integer barberId, String scheduleDay, String scheduleTime, Boolean available) {
+    // 🔹 Construtor privado para impedir instanciação direta
+    private Schedule(Integer barberId, String scheduleDay, String scheduleTime, Boolean available) {
         this.barberId = barberId;
         this.scheduleDay = scheduleDay;
         this.scheduleTime = scheduleTime;
         this.available = available;
     }
 
-    public Long getId() {
-        return id;
+    // 🔹 Método Factory para criar instâncias
+    protected static Schedule create(Integer barberId, String scheduleDay, String scheduleTime, Boolean available) {
+        return new Schedule(barberId, scheduleDay, scheduleTime, available);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getBarberId() {
-        return barberId;
-    }
-
-    public void setBarberId(Integer barberId) {
-        this.barberId = barberId;
-    }
-
-    public String getScheduleDay() {
-        return scheduleDay;
-    }
-
-    public void setScheduleDay(String scheduleDay) {
-        this.scheduleDay = scheduleDay;
-    }
-
-    public String getScheduleTime() {
-        return scheduleTime;
-    }
-
-    public void setScheduleTime(String scheduleTime) {
-        this.scheduleTime = scheduleTime;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-    
+    // Getters
+    public Long getId() { return id; }
+    public Integer getBarberId() { return barberId; }
+    public String getScheduleDay() { return scheduleDay; }
+    public String getScheduleTime() { return scheduleTime; }
+    public Boolean getAvailable() { return available; }
 }
