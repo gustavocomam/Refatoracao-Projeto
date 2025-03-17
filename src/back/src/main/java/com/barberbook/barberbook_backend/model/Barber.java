@@ -8,69 +8,33 @@ public class Barber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(nullable = false)
     private String name;
-    private Integer barbershop_id;
+    private Integer barbershopId;
     private String cpf;
     private String password;
     private Boolean admin;
 
-    public Barber() {
-    }
-
-    public Barber(String name, Integer barbershop_id, String cpf, String password, Boolean admin) {
+    // 🔹 Construtor privado
+    private Barber(String name, Integer barbershopId, String cpf, String password, Boolean admin) {
         this.name = name;
-        this.barbershop_id = barbershop_id;
+        this.barbershopId = barbershopId;
         this.cpf = cpf;
         this.password = password;
         this.admin = admin;
     }
 
-    public int getId() {
-        return id;
+    // 🔹 Método Factory
+    protected static Barber create(String name, Integer barbershopId, String cpf, String password, Boolean admin) {
+        return new Barber(name, barbershopId, cpf, password, admin);
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getBarbershop_id() {
-        return barbershop_id;
-    }
-
-    public void setBarbershop_id(Integer barbershop_id) {
-        this.barbershop_id = barbershop_id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
+    // Getters
+    public Integer getId() { return id; }
+    public String getName() { return name; }
+    public Integer getBarbershopId() { return barbershopId; }
+    public String getCpf() { return cpf; }
+    public String getPassword() { return password; }
+    public Boolean getAdmin() { return admin; }
 }
