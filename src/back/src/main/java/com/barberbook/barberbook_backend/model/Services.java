@@ -23,54 +23,23 @@ public class Services {
     @Column(name = "barber_id", nullable = false)
     private Integer barberId;
 
-    public Services() {
-    }
-
-    public Services(String name, BigDecimal servicePrice, boolean serviceType, Integer barberId) {
+    // 🔹 Construtor privado para impedir instanciação direta
+    private Services(String name, BigDecimal servicePrice, boolean serviceType, Integer barberId) {
         this.name = name;
         this.servicePrice = servicePrice;
         this.serviceType = serviceType;
         this.barberId = barberId;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    // 🔹 Método Factory para criar instâncias
+    protected static Services create(String name, BigDecimal servicePrice, boolean serviceType, Integer barberId) {
+        return new Services(name, servicePrice, serviceType, barberId);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getServicePrice() {
-        return servicePrice;
-    }
-
-    public void setServicePrice(BigDecimal servicePrice) {
-        this.servicePrice = servicePrice;
-    }
-
-    public boolean isServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(boolean serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    public Integer getBarberId() {
-        return barberId;
-    }
-
-    public void setBarberId(int barber_id) {
-        this.barberId = barber_id;
-    }
+    // Getters
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public BigDecimal getServicePrice() { return servicePrice; }
+    public boolean isServiceType() { return serviceType; }
+    public Integer getBarberId() { return barberId; }
 }
