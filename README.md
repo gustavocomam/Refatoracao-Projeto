@@ -2,7 +2,7 @@
 - Gustavo Comam
 - Lucas Porto
 
-# Refatoração do Projeto com Singleton
+# Primeira Refatoração do Projeto utilizando o Singleton
 
 ## Visão Geral
 Este projeto foi atualizado para implementar o padrão Singleton em diversos serviços (Service) do back-end. O Singleton garante que cada serviço tenha apenas uma única instância, reduzindo o consumo desnecessário de memória e melhorando o gerenciamento das dependências.
@@ -37,3 +37,5 @@ Antes da refatoração, os serviços eram gerenciados pelo Spring Boot usando @S
 - Evita múltiplas instâncias do mesmo serviço.
 - Melhora a eficiência e o controle do ciclo de vida dos serviços.
 - Substitui a injeção automática do Spring por um Singleton explícito.
+
+# Segunda Refatoração do Projeto utilizando o Factory Method
